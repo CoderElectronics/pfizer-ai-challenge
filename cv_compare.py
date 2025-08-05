@@ -1,4 +1,5 @@
 import cv2
+import sys
 from cv2.gapi.streaming import desync
 import pandas as pd
 import numpy as np
@@ -8,7 +9,12 @@ from super_image import EdsrModel, ImageLoader
 from PIL import Image
 from pathlib import Path
 
-cap = cv2.VideoCapture('practice video.mp4') # Open the Video
+# input args
+if len(sys.argv) != 3:
+    print("Usage: track.py <video_file> <input times>")
+    sys.exit(1)
+
+cap = cv2.VideoCapture(sys.argv[1]) # Open the Video
 
 frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -42,7 +48,7 @@ while cap.isOpened():
         if cv2.contourArea(contour) < 500:
             continue
 
-        if pt_df.__len__() != 0 and (c_x > 100 and c_y > 100):
+        if pt_df.__len__() != 0 and not (c_x <= 150 and c_y <= 150):
             print(c_x, c_y)
             tr_pts.extend([(c_x, c_y)])
 

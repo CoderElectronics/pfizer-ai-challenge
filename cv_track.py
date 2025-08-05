@@ -2,13 +2,8 @@ import cv2
 
 cap = cv2.VideoCapture('practice video.mp4') # Open the Video
 
-
 frame_width = int( cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-
 frame_height =int( cap.get( cv2.CAP_PROP_FRAME_HEIGHT))
-
-fourcc = cv2.VideoWriter_fourcc(*"MP4V")
-out = cv2.VideoWriter("output.mp4", fourcc, 5.0, (1280,720))
 
 ret, frame1 = cap.read() # We define two frame one after another
 ret, frame2 = cap.read()
@@ -33,7 +28,6 @@ while cap.isOpened():
     #cv2.drawContours(frame1, contours, -1, (0, 255, 0), 2)
 
     image = cv2.resize(frame1, (1280,720))
-    out.write(image)
     cv2.imshow("feed", frame1)
     frame1 = frame2
     ret, frame2 = cap.read()
@@ -43,4 +37,3 @@ while cap.isOpened():
 
 cv2.destroyAllWindows()
 cap.release()
-out.release()
