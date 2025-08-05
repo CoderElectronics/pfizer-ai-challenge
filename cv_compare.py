@@ -52,8 +52,8 @@ while cap.isOpened():
             print(c_x, c_y)
             tr_pts.extend([(c_x, c_y)])
 
-            nd_r = np.array(disp_pts[-100:])
-            nd_tr = np.array(tr_pts[-100:])
+            nd_r = np.array(disp_pts[-20:])
+            nd_tr = np.array(tr_pts[-20:])
             rv = (int(c_x), int(c_y))
 
             cv2.polylines(frame1, [nd_r], False, (0, 0, 255), 3)
